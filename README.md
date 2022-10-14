@@ -71,6 +71,12 @@ parking ticket."
 AC3: When the parking boy attempt to park a car into a parking lot without a position. The error message should be "Not
 enough position."
 
+### Tasking
+1. given a wrong ticket to parking boy when customer to the parking lot then return Unrecognized parking ticket
+2. given a null ticket to parking boy when customer to the parking lot then return NoTicketException
+3. given capacity of parking lot is 10 and it`s full when customer to the parking lot to a car then return Not
+   enough positionException
+
 ## Story 3
 
 As a parking lots service manager, I would like to have a parking boy parking cars to multiple parking lots. So that I

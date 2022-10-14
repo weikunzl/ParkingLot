@@ -45,7 +45,7 @@ namespace ParkingLot
                 return PickUpFromParkingLot(ticket);
             }
 
-            return null;
+            throw new WrongTicketException("Unrecognized parking ticket.");
         }
 
         public List<string> Parking(List<Car> cars)

@@ -58,13 +58,14 @@ namespace ParkingLotTest
         }
 
         [Fact]
-        public void Should_return_empty_when_parking_given_a_wrong_ticket()
+        public void Should_throw_WrongTicketException_when_parking_given_a_wrong_ticket()
         {
             var parkingLot = new ParkingLot();
 
-            Car car = parkingLot.Pickup("T11111");
+            Action pickupAction = () => parkingLot.Pickup("T11111");
 
-            Assert.Null(car);
+            var wrongTicketException = Assert.Throws<WrongTicketException>(pickupAction);
+            Assert.Equal("Unrecognized parking ticket.", wrongTicketException.Message);
         }
 
         [Fact]
@@ -72,12 +73,13 @@ namespace ParkingLotTest
         {
             var parkingLot = new ParkingLot();
             var ticket = parkingLot.Parking(new Car("AE8888"));
-
             Car car = parkingLot.Pickup(ticket);
-            Car carTwice = parkingLot.Pickup(ticket);
+
+            Action pickupAction = () => parkingLot.Pickup(ticket);
 
             Assert.Equal("AE8888", car.PlantNumber);
-            Assert.Null(carTwice);
+            var wrongTicketException = Assert.Throws<WrongTicketException>(pickupAction);
+            Assert.Equal("Unrecognized parking ticket.", wrongTicketException.Message);
         }
 
         [Fact]
