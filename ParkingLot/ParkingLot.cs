@@ -73,6 +73,11 @@ namespace ParkingLot
             return capacity - GetParkingSpaces().Count;
         }
 
+        public int GetCapacity()
+        {
+            return capacity;
+        }
+
         private Car PickUpFromParkingLot(string ticket)
         {
             var car = parkingSpaces[ticket];
