@@ -79,5 +79,20 @@ namespace ParkingLotTest
             Assert.Equal("AE8888", car.PlantNumber);
             Assert.Null(carTwice);
         }
+
+        [Fact]
+        public void Should_return_empty_when_parking_given_parking_lot_capacity_2()
+        {
+            var parkingLot = new ParkingLot(2);
+            var cars = new List<Car>
+            {
+                new Car("AE00001"),
+                new Car("AE00002"),
+                new Car("AE00003"),
+            };
+            var ticketNumbers = parkingLot.Parking(cars);
+
+            Assert.Equal(2, ticketNumbers.Count);
+        }
     }
 }
