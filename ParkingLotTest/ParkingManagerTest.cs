@@ -159,15 +159,21 @@ namespace ParkingLotTest
         [Fact]
         public void Should_return_empty_when_parking_given_parking_lot_capacity_2()
         {
+            List<ParkingLot> parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(1),
+                new ParkingLot(1),
+            };
+            ParkingManager parkingManager = new ParkingManager(parkingLots);
             var parkingLot = new ParkingLot(2);
             var cars = new List<Car>
             {
                 new Car("AE00001"),
                 new Car("AE00002"),
             };
-            var ticketNumbers = parkingLot.Parking(cars);
+            var ticketNumbers = parkingManager.Parking(cars);
 
-            Action parkingAction = () => parkingLot.Parking(new Car("AE00003"));
+            Action parkingAction = () => parkingManager.Parking(new Car("AE00003"));
 
             Assert.Equal(2, ticketNumbers.Count);
             var notEnoughCapacityException = Assert.Throws<NotEnoughCapacityException>(parkingAction);

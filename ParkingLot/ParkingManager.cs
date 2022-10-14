@@ -14,7 +14,13 @@ namespace ParkingLot
 
         public string Parking(Car car)
         {
-            return parkingLots.First(_ => _.IsNotFull()).Parking(car);
+            var parkingLot = parkingLots.Find(_ => _.IsNotFull());
+            if (parkingLot == null)
+            {
+                throw new NotEnoughCapacityException("Not enough position.");
+            }
+
+            return parkingLot.Parking(car);
         }
 
         public List<string> Parking(List<Car> cars)
