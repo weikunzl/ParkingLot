@@ -21,7 +21,12 @@ namespace ParkingLot
 
         public Car Pickup(string ticket)
         {
-            return parkingLots[ticket];
+            if (parkingLots.ContainsKey(ticket))
+            {
+                return parkingLots[ticket];
+            }
+
+            return null;
         }
 
         public List<string> Parking(List<Car> cars)

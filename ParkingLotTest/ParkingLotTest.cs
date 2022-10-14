@@ -56,5 +56,15 @@ namespace ParkingLotTest
             var parkedException = Assert.Throws<ParkedException>(parkingAction);
             Assert.Equal("Car parked exception", parkedException.Message);
         }
+
+        [Fact]
+        public void Should_return_empty_when_parking_given_a_wrong_ticket()
+        {
+            var parkingLot = new ParkingLot();
+
+            Car car = parkingLot.Pickup("T11111");
+
+            Assert.Null(car);
+        }
     }
 }
