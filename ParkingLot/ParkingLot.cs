@@ -8,11 +8,11 @@ namespace ParkingLot
     {
         private Dictionary<string, Car> parkingLots;
 
-        private int capacity = int.MaxValue;
+        private int capacity = 10;
 
         public ParkingLot()
         {
-            parkingLots = new Dictionary<string, Car>();
+            parkingLots = new Dictionary<string, Car>(capacity);
         }
 
         public ParkingLot(int capacity)
@@ -42,9 +42,7 @@ namespace ParkingLot
         {
             if (parkingLots.ContainsKey(ticket))
             {
-                var car = parkingLots[ticket];
-                parkingLots.Remove(ticket);
-                return car;
+                return PickUpFromParkingLot(ticket);
             }
 
             return null;
@@ -53,6 +51,13 @@ namespace ParkingLot
         public List<string> Parking(List<Car> cars)
         {
             return cars.Select(Parking).Where(_ => _ != null).ToList();
+        }
+
+        private Car PickUpFromParkingLot(string ticket)
+        {
+            var car = parkingLots[ticket];
+            parkingLots.Remove(ticket);
+            return car;
         }
     }
 }

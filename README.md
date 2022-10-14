@@ -43,21 +43,19 @@ graph LR
     Parking --> IsOutOfParkingCapacity
     IsOutOfParkingCapacity -- result: boolean --> Parking
     
-    Parking -- car: Car --> GenerateTicketNumber
-    GenerateTicketNumber -- ticketNumber: string --> Parking
+    Parking -- car: Car --> A[GenerateTicketNumber]
+    A -- ticketNumber: string --> Parking
     
-    parkingCar -- ticketNumber: string, car: Car --> AddCar
-    AddCar -- void --> parkingCar
+    Parking -- "car: [Car]" --> B[GenerateTicketNumber]
+    B -- "ticketNumber: [string]" --> Parking
+    
+    A.PickUp -- ticketNumber: string --> PickUp
+    PickUp -- car: Car --> A.PickUp 
+    
+    PickUp -- ticketNumber:string --> PickUpFromParkingLot
+    PickUpFromParkingLot -- car: Car --> PickUp
 
 ```
-
-TicketGenerator
-Ticket
-    car
-    ticketNumber
-
-parking
-    List<Ticket> parkingCar
 
 ## Story 2
 
