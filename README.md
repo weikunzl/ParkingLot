@@ -131,3 +131,6 @@ standard parking boy (*Story 3*). Note that (s)he can only store and fetch the c
 
 AC3. If the manager tells the parking boy to park or fetch the car, then the manager should be able to display the error
 message to the customer if the parking boy failed to do the operation.
+
+### Tasking
+given parking boy and parking lot list when parking car then parking boy
