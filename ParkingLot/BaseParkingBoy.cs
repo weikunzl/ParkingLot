@@ -14,6 +14,11 @@ namespace ParkingLot
 
         public string Parking(Car car)
         {
+            if (ParkingLots.Any(_ => _.GetParkingSpaces().ContainsValue(car)))
+            {
+                throw new ParkedException("Car parked exception");
+            }
+
             var parkingLot = GetLotForParking();
             if (parkingLot == null)
             {

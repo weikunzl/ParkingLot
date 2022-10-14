@@ -3,9 +3,17 @@ using System.Linq;
 
 namespace ParkingLot
 {
-    public class ParkingManager
+    public class ParkingManager : SequenceParkingBoy
     {
         private List<BaseParkingBoy> parkingBoys = new List<BaseParkingBoy>();
+
+        public ParkingManager(List<ParkingLot> parkingLots) : base(parkingLots)
+        {
+        }
+
+        public ParkingManager() : base(new List<ParkingLot>())
+        {
+        }
 
         public void AddParkingBoy(BaseParkingBoy parkingBoy)
         {
