@@ -88,6 +88,12 @@ full).
 
 AC2: All the requirement in *Story 1* and *Story 2* **MUST** be satisfied.
 
+### Tasking
+1. 
+parking Manager
+   parkinglots 
+
+
 ## Story 4
 
 As a parking lots service manager. I would like to have another kind of parking boy to help me parking cars to multiple
