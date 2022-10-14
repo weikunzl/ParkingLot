@@ -10,5 +10,10 @@ namespace ParkingLot
         }
 
         public string PlantNumber { get; }
+
+        public override bool Equals(object obj)
+        {
+            return PlantNumber.Equals(((Car)obj)?.PlantNumber);
+        }
     }
 }

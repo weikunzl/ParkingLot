@@ -9,6 +9,11 @@ namespace ParkingLot
         private Dictionary<string, Car> parkingLots = new Dictionary<string, Car>();
         public string Parking(Car car)
         {
+            if (parkingLots.ContainsValue(car))
+            {
+                throw new ParkedException("Car parked exception");
+            }
+
             string ticket = TicketGenerator.CreateTicket();
             parkingLots.Add(ticket, car);
             return ticket;
