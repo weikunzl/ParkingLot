@@ -101,11 +101,14 @@ namespace ParkingLotTest
             {
                 new Car("AE00001"),
                 new Car("AE00002"),
-                new Car("AE00003"),
             };
             var ticketNumbers = parkingLot.Parking(cars);
 
+            Action parkingAction = () => parkingLot.Parking(new Car("AE00003"));
+
             Assert.Equal(2, ticketNumbers.Count);
+            var notEnoughCapacityException = Assert.Throws<NotEnoughCapacityException>(parkingAction);
+            Assert.Equal("Not enough position.", notEnoughCapacityException.Message);
         }
     }
 }

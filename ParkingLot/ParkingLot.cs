@@ -30,7 +30,7 @@ namespace ParkingLot
 
             if (parkingLots.Count >= capacity)
             {
-                return null;
+                throw new NotEnoughCapacityException("Not enough position.");
             }
 
             string ticket = TicketGenerator.CreateTicket();
