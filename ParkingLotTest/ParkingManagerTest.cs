@@ -23,6 +23,26 @@ namespace ParkingLotTest
         }
 
         [Fact]
+        public void Should_return_2_parking_ticket_number_when_parking_given_2_car()
+        {
+            List<ParkingLot> parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(2),
+            };
+            ParkingManager parkingManager = new ParkingManager(parkingLots);
+            var cars = new List<Car>
+            {
+                new Car("AE00001"),
+                new Car("AE00002"),
+            };
+
+            List<string> ticketNumbers = parkingManager.Parking(cars);
+
+            Assert.Equal(3, ticketNumbers.Count);
+        }
+
+
+        [Fact]
         public void Should_pickup_a_parked_car_when_pickup_at_parking_lot_given_a_ticket()
         {
             var parkingLot = new ParkingLot();

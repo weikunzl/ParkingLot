@@ -15,5 +15,10 @@ namespace ParkingLot
         {
             return parkingLots[0].Parking(car);
         }
+
+        public List<string> Parking(List<Car> cars)
+        {
+            return parkingLots[0].Parking(cars);
+        }
     }
 }
