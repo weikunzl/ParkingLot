@@ -3,18 +3,18 @@ using System.Linq;
 
 namespace ParkingLot
 {
-    public class ParkingManager
+    public abstract class BaseParkingManager
     {
-        private List<ParkingLot> parkingLots;
-
-        public ParkingManager(List<ParkingLot> parkingLots)
+        public BaseParkingManager(List<ParkingLot> parkingLots)
         {
-            this.parkingLots = parkingLots;
+            this.ParkingLots = parkingLots;
         }
+
+        protected List<ParkingLot> ParkingLots { get; set; }
 
         public string Parking(Car car)
         {
-            var parkingLot = parkingLots.Find(_ => !_.IsFull());
+            var parkingLot = ParkingLots.Find(_ => !_.IsFull());
             if (parkingLot == null)
             {
                 throw new NotEnoughCapacityException("Not enough position.");
@@ -35,7 +35,7 @@ namespace ParkingLot
                 throw new TicketNoProvideException("Please provide your parking ticket.");
             }
 
-            ParkingLot parkingLot = parkingLots.Find(_ => _.GetParkingSpaces().ContainsKey(ticketNumber));
+            ParkingLot parkingLot = ParkingLots.Find(_ => _.GetParkingSpaces().ContainsKey(ticketNumber));
             if (parkingLot == null)
             {
                 throw new WrongTicketException("Unrecognized parking ticket.");
