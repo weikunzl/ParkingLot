@@ -71,6 +71,7 @@ namespace ParkingLotTest
                 new ParkingLot(10),
             };
             ParkingManager parkingManager = new ParkingManager(parkingLots);
+
             List<string> ticketNumbers = parkingManager.Parking(new List<Car>
             {
                 new Car("AE00001"),
@@ -84,28 +85,17 @@ namespace ParkingLotTest
         [Fact]
         public void Should_pickup_a_parked_car_when_pickup_at_parking_lot_given_a_ticket()
         {
-            var parkingLot = new ParkingLot();
-            var ticketNumber = parkingLot.Parking(new Car("AE8888"));
+            List<ParkingLot> parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(2),
+                new ParkingLot(10),
+            };
+            ParkingManager parkingManager = new ParkingManager(parkingLots);
+            var ticketNumber = parkingManager.Parking(new Car("AE8888"));
 
-            Car car = parkingLot.Pickup(ticketNumber);
+            Car car = parkingManager.Pickup(ticketNumber);
 
             Assert.Equal("AE8888", car.PlantNumber);
-        }
-
-        [Fact]
-        public void Should_return_three_parking_ticket_number_when_parking_given_three_car()
-        {
-            var parkingLot = new ParkingLot();
-
-            var cars = new List<Car>
-            {
-                new Car("AE00001"),
-                new Car("AE00002"),
-                new Car("AE00003"),
-            };
-            var ticketNumbers = parkingLot.Parking(cars);
-
-            Assert.Equal(3, ticketNumbers.Count);
         }
 
         [Fact]
@@ -148,16 +138,20 @@ namespace ParkingLotTest
         [Fact]
         public void Should_throw_TicketNoProvideException_when_parking_given_NO_ticket()
         {
-            var parkingLot = new ParkingLot();
+            ParkingManager parkingManager = new ParkingManager(new List<ParkingLot>()
+            {
+                new ParkingLot(2),
+                new ParkingLot(10),
+            });
 
-            Action pickupAction = () => parkingLot.Pickup(null);
+            Action pickupAction = () => parkingManager.Pickup(null);
 
             var ticketNoProvideException = Assert.Throws<TicketNoProvideException>(pickupAction);
             Assert.Equal("Please provide your parking ticket.", ticketNoProvideException.Message);
         }
 
         [Fact]
-        public void Should_return_empty_when_parking_given_parking_lot_capacity_2()
+        public void Should_throw_NotEnoughCapacityException_when_parking_given_parking_lot_capacity_2()
         {
             List<ParkingLot> parkingLots = new List<ParkingLot>()
             {
@@ -165,7 +159,6 @@ namespace ParkingLotTest
                 new ParkingLot(1),
             };
             ParkingManager parkingManager = new ParkingManager(parkingLots);
-            var parkingLot = new ParkingLot(2);
             var cars = new List<Car>
             {
                 new Car("AE00001"),
