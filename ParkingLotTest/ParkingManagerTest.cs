@@ -63,6 +63,25 @@ namespace ParkingLotTest
         }
 
         [Fact]
+        public void Should_parking_sequentially_to_other_parking_lot_when_parking_given_3_cars()
+        {
+            List<ParkingLot> parkingLots = new List<ParkingLot>()
+            {
+                new ParkingLot(2),
+                new ParkingLot(10),
+            };
+            ParkingManager parkingManager = new ParkingManager(parkingLots);
+            List<string> ticketNumbers = parkingManager.Parking(new List<Car>
+            {
+                new Car("AE00001"),
+                new Car("AE00002"),
+                new Car("AE00003"),
+            });
+
+            Assert.Equal(3, ticketNumbers.Count);
+        }
+
+        [Fact]
         public void Should_pickup_a_parked_car_when_pickup_at_parking_lot_given_a_ticket()
         {
             var parkingLot = new ParkingLot();

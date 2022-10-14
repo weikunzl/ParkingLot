@@ -19,7 +19,7 @@ namespace ParkingLot
 
         public List<string> Parking(List<Car> cars)
         {
-            return parkingLots[0].Parking(cars);
+            return cars.Select(Parking).ToList();
         }
     }
 }
