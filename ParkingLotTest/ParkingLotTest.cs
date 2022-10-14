@@ -38,7 +38,7 @@ namespace ParkingLotTest
             {
                 new Car("AE00001"),
                 new Car("AE00002"),
-                new Car("AE00003")
+                new Car("AE00003"),
             };
             var ticketNumbers = parkingLot.Parking(cars);
 
@@ -65,6 +65,19 @@ namespace ParkingLotTest
             Car car = parkingLot.Pickup("T11111");
 
             Assert.Null(car);
+        }
+
+        [Fact]
+        public void Should_return_empty_when_parking_given_a_ticket_has_been_used()
+        {
+            var parkingLot = new ParkingLot();
+            var ticket = parkingLot.Parking(new Car("AE8888"));
+
+            Car car = parkingLot.Pickup(ticket);
+            Car carTwice = parkingLot.Pickup(ticket);
+
+            Assert.Equal("AE8888", car.PlantNumber);
+            Assert.Null(carTwice);
         }
     }
 }
