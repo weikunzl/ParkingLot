@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ParkingLotTest
 {
     using ParkingLot;
@@ -24,6 +26,22 @@ namespace ParkingLotTest
             Car car = parkingLot.Pickup(ticketNumber);
 
             Assert.Equal("AE8888", car.PlantNumber);
+        }
+
+        [Fact]
+        public void Should_return_three_parking_ticket_number_when_parking_given_three_car()
+        {
+            var parkingLot = new ParkingLot();
+
+            var cars = new List<Car>
+            {
+                new Car("AE00001"),
+                new Car("AE00002"),
+                new Car("AE00003")
+            };
+            var ticketNumbers = parkingLot.Parking(cars);
+
+            Assert.Equal(3, ticketNumbers.Count);
         }
     }
 }

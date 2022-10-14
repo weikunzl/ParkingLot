@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ParkingLot
 {
@@ -16,6 +17,11 @@ namespace ParkingLot
         public Car Pickup(string ticket)
         {
             return parkingLots[ticket];
+        }
+
+        public List<string> Parking(List<Car> cars)
+        {
+            return cars.Select(Parking).ToList();
         }
     }
 }
