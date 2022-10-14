@@ -83,6 +83,17 @@ namespace ParkingLotTest
         }
 
         [Fact]
+        public void Should_throw_TicketNoProvideException_when_parking_given_NO_ticket()
+        {
+            var parkingLot = new ParkingLot();
+
+            Action pickupAction = () => parkingLot.Pickup(null);
+
+            var ticketNoProvideException = Assert.Throws<TicketNoProvideException>(pickupAction);
+            Assert.Equal("Please provide your parking ticket.", ticketNoProvideException.Message);
+        }
+
+        [Fact]
         public void Should_return_empty_when_parking_given_parking_lot_capacity_2()
         {
             var parkingLot = new ParkingLot(2);

@@ -40,6 +40,11 @@ namespace ParkingLot
 
         public Car Pickup(string ticket)
         {
+            if (ticket == null)
+            {
+                throw new TicketNoProvideException("Please provide your parking ticket.");
+            }
+
             if (parkingLots.ContainsKey(ticket))
             {
                 return PickUpFromParkingLot(ticket);
