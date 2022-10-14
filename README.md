@@ -89,9 +89,8 @@ full).
 AC2: All the requirement in *Story 1* and *Story 2* **MUST** be satisfied.
 
 ### Tasking
-1. 
-parking Manager
-   parkinglots 
+1. given a car to parking boy when customer to the parking lot then return a parking ticket
+...
 
 
 ## Story 4
