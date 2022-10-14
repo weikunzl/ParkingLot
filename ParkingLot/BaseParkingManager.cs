@@ -7,14 +7,14 @@ namespace ParkingLot
     {
         public BaseParkingManager(List<ParkingLot> parkingLots)
         {
-            this.ParkingLots = parkingLots;
+            ParkingLots = parkingLots;
         }
 
-        protected List<ParkingLot> ParkingLots { get; set; }
+        protected List<ParkingLot> ParkingLots { get; }
 
         public string Parking(Car car)
         {
-            var parkingLot = ParkingLots.Find(_ => !_.IsFull());
+            var parkingLot = GetLotForParking();
             if (parkingLot == null)
             {
                 throw new NotEnoughCapacityException("Not enough position.");
@@ -43,5 +43,7 @@ namespace ParkingLot
 
             return parkingLot.Pickup(ticketNumber);
         }
+
+        protected abstract ParkingLot GetLotForParking();
     }
 }

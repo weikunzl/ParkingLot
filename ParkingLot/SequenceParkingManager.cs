@@ -8,5 +8,10 @@ namespace ParkingLot
         public SequenceParkingManager(List<ParkingLot> parkingLots) : base(parkingLots)
         {
         }
+
+        protected override ParkingLot GetLotForParking()
+        {
+            return ParkingLots.Find(_ => !_.IsFull());
+        }
     }
 }
