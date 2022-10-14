@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ParkingLot
 {
@@ -13,7 +14,7 @@ namespace ParkingLot
 
         public string Parking(Car car)
         {
-            return parkingLots[0].Parking(car);
+            return parkingLots.First(_ => _.IsNotFull()).Parking(car);
         }
 
         public List<string> Parking(List<Car> cars)

@@ -28,7 +28,7 @@ namespace ParkingLot
                 throw new ParkedException("Car parked exception");
             }
 
-            if (parkingSpaces.Count >= capacity)
+            if (!IsNotFull())
             {
                 throw new NotEnoughCapacityException("Not enough position.");
             }
@@ -56,6 +56,11 @@ namespace ParkingLot
         public List<string> Parking(List<Car> cars)
         {
             return cars.Select(Parking).Where(_ => _ != null).ToList();
+        }
+
+        public bool IsNotFull()
+        {
+            return this.parkingSpaces.Count < capacity;
         }
 
         private Car PickUpFromParkingLot(string ticket)
