@@ -113,22 +113,30 @@ namespace ParkingLotTest
         [Fact]
         public void Should_throw_WrongTicketException_when_parking_given_a_wrong_ticket()
         {
-            var parkingLot = new ParkingLot();
+            ParkingManager parkingManager = new ParkingManager(new List<ParkingLot>()
+            {
+                new ParkingLot(2),
+                new ParkingLot(10),
+            });
 
-            Action pickupAction = () => parkingLot.Pickup("T11111");
+            Action pickupAction = () => parkingManager.Pickup("T11111");
 
             var wrongTicketException = Assert.Throws<WrongTicketException>(pickupAction);
             Assert.Equal("Unrecognized parking ticket.", wrongTicketException.Message);
         }
 
         [Fact]
-        public void Should_return_empty_when_parking_given_a_ticket_has_been_used()
+        public void Should_throw_WrongTicketException_when_parking_given_a_ticket_has_been_used()
         {
-            var parkingLot = new ParkingLot();
-            var ticket = parkingLot.Parking(new Car("AE8888"));
-            Car car = parkingLot.Pickup(ticket);
+            ParkingManager parkingManager = new ParkingManager(new List<ParkingLot>()
+            {
+                new ParkingLot(2),
+                new ParkingLot(10),
+            });
+            var ticket = parkingManager.Parking(new Car("AE8888"));
+            Car car = parkingManager.Pickup(ticket);
 
-            Action pickupAction = () => parkingLot.Pickup(ticket);
+            Action pickupAction = () => parkingManager.Pickup(ticket);
 
             Assert.Equal("AE8888", car.PlantNumber);
             var wrongTicketException = Assert.Throws<WrongTicketException>(pickupAction);
@@ -153,12 +161,11 @@ namespace ParkingLotTest
         [Fact]
         public void Should_throw_NotEnoughCapacityException_when_parking_given_parking_lot_capacity_2()
         {
-            List<ParkingLot> parkingLots = new List<ParkingLot>()
+            ParkingManager parkingManager = new ParkingManager(new List<ParkingLot>()
             {
                 new ParkingLot(1),
                 new ParkingLot(1),
-            };
-            ParkingManager parkingManager = new ParkingManager(parkingLots);
+            });
             var cars = new List<Car>
             {
                 new Car("AE00001"),
