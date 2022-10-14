@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace ParkingLot
 {
-    public class MoreEmptyPositionParkingManager : BaseParkingManager
+    public class MoreEmptyPositionParkingBoy : BaseParkingBoy
     {
-        public MoreEmptyPositionParkingManager(List<ParkingLot> parkingLots) : base(parkingLots)
+        public MoreEmptyPositionParkingBoy(List<ParkingLot> parkingLots) : base(parkingLots)
         {
         }
 
