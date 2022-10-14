@@ -101,10 +101,14 @@ namespace ParkingLotTest
         [Fact]
         public void Should_throw_parked_car_exception_when_parking_given_a_parked_car()
         {
-            var parkingLot = new ParkingLot();
-            parkingLot.Parking(new Car("AE8888"));
+            ParkingManager parkingManager = new ParkingManager(new List<ParkingLot>()
+            {
+                new ParkingLot(2),
+                new ParkingLot(10),
+            });
+            parkingManager.Parking(new Car("AE8888"));
 
-            Action parkingAction = () => parkingLot.Parking(new Car("AE8888"));
+            Action parkingAction = () => parkingManager.Parking(new Car("AE8888"));
 
             var parkedException = Assert.Throws<ParkedException>(parkingAction);
             Assert.Equal("Car parked exception", parkedException.Message);
